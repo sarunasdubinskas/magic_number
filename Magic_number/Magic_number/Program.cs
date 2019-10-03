@@ -11,12 +11,13 @@ namespace Magic_number
             magic_number = FindMagicNumber();
             PrintResults(magic_number);
 
+            Console.WriteLine("Press any key...");
             Console.ReadKey();
         }
 
         private static void PrintResults(int magic_number)
         {
-            Console.WriteLine("Magic number is:" + magic_number);
+            Console.WriteLine("Magic number is: " + magic_number);
             Console.WriteLine(magic_number + "*2 = " + (magic_number * 2));
             Console.WriteLine(magic_number + "*3 = " + (magic_number * 3));
             Console.WriteLine(magic_number + "*4 = " + (magic_number * 4));
@@ -26,25 +27,19 @@ namespace Magic_number
 
         private static int FindMagicNumber()
         {
-            bool isAllDifferent = false;
             int magic_number = -1;
 
             for (int i = 102345; i < 165432; i++)
             {
-                isAllDifferent = CheckIfAllNumbersIsDifferent(Convert.ToString(i));
-
-                if (isAllDifferent)
+                if ((CheckIfAllNumbersIsDifferent(Convert.ToString(i))) &&
+                    (CheckIfAllNumbersIsDifferent(Convert.ToString(i * 2)) && CheckIfHasSameNumbers(Convert.ToString(i * 2), Convert.ToString(i))) &&
+                    (CheckIfAllNumbersIsDifferent(Convert.ToString(i * 3)) && CheckIfHasSameNumbers(Convert.ToString(i * 3), Convert.ToString(i))) &&
+                    (CheckIfAllNumbersIsDifferent(Convert.ToString(i * 4)) && CheckIfHasSameNumbers(Convert.ToString(i * 4), Convert.ToString(i))) &&
+                    (CheckIfAllNumbersIsDifferent(Convert.ToString(i * 5)) && CheckIfHasSameNumbers(Convert.ToString(i * 5), Convert.ToString(i))) &&
+                    (CheckIfAllNumbersIsDifferent(Convert.ToString(i * 6)) && CheckIfHasSameNumbers(Convert.ToString(i * 6), Convert.ToString(i)))
+                    )
                 {
-                    if (
-                        (CheckIfAllNumbersIsDifferent(Convert.ToString(i * 2)) && CheckIfHasSameNumbers(Convert.ToString(i * 2), Convert.ToString(i))) &&
-                        (CheckIfAllNumbersIsDifferent(Convert.ToString(i * 3)) && CheckIfHasSameNumbers(Convert.ToString(i * 3), Convert.ToString(i))) &&
-                        (CheckIfAllNumbersIsDifferent(Convert.ToString(i * 4)) && CheckIfHasSameNumbers(Convert.ToString(i * 4), Convert.ToString(i))) &&
-                        (CheckIfAllNumbersIsDifferent(Convert.ToString(i * 5)) && CheckIfHasSameNumbers(Convert.ToString(i * 5), Convert.ToString(i))) &&
-                        (CheckIfAllNumbersIsDifferent(Convert.ToString(i * 6)) && CheckIfHasSameNumbers(Convert.ToString(i * 6), Convert.ToString(i)))
-                        )
-                    {
-                        return i;
-                    }
+                    return i;
                 }
             }
             return magic_number;
@@ -56,7 +51,7 @@ namespace Magic_number
             checkableNumberArray = checkNumber.ToCharArray();
             for (int i = 0; i < checkableNumberArray.Length; i++)
             {
-                for (int j = i +1 ; j < checkableNumberArray.Length; j++)
+                for (int j = i + 1; j < checkableNumberArray.Length; j++)
                 {
                     if (checkableNumberArray[i] == checkableNumberArray[j])
                     {
@@ -78,7 +73,7 @@ namespace Magic_number
                 hasNumber = false;
                 for (int j = 0; j < checkableSecondaryNumberArray.Length; j++)
                 {
-                    if (checkablePrimeNumberArray[i]==checkableSecondaryNumberArray[j])
+                    if (checkablePrimeNumberArray[i] == checkableSecondaryNumberArray[j])
                     {
                         hasNumber = true;
                         break;
